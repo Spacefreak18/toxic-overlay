@@ -1,0 +1,21 @@
+# description:	Audio visualization sdl frontend
+# depends: sdl2 poco mariadb-client projectm
+
+name=projectm-sdl
+version=4.0.0
+release=1
+_commit=854eebaa26d91042ba8f097ec5e409bdcea78383
+source="$name-$version.tar.gz::https://github.com/projectM-visualizer/frontend-sdl2/archive/$_commit.tar.gz"
+
+build() {
+	cd frontend-sdl2-$_commit
+
+
+	cp /home/paul/CMakeLists.txt ./src/
+	cmake -B build
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
+
+	mkdir -p $PKG/usr/bin
+	cp ./build/src/projectMSDL $PKG/usr/bin/
+}

@@ -1,0 +1,16 @@
+# description:	C++ class libraries for network-centric, portable applications
+# depends:	unixodbc mariadb-client
+
+name=poco
+version=1.13.1
+release=1
+source=https://github.com/pocoproject/poco/archive/refs/tags/$name-$version-release.tar.gz
+
+build() {
+	cd $name-$name-$version-release
+	mkdir cmake-build
+	cd cmake-build
+	cmake ..
+	cmake --build . --config Release
+	make DESTDIR=$PKG install
+}
